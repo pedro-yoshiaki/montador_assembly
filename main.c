@@ -1,7 +1,22 @@
 /*==============================================================*/
-                /*Tï¿½tulo: Exemplo de Montador Assembly*/
+                /*Título: Exemplo de Montador Assembly*/
                 /*Data: 20/08/2024*/
+		/*Elaborado por: Pedro Nohara e Luciano Araujo
 /*==============================================================*/
+
+/*
+Funcionalidades
+	Entrada: 
+ 		Um arquivo de texto (.asm) contendo instruções em linguagem Assembly.
+	Saída: 
+ 		Um arquivo binário (.mem) contendo o código traduzido para Linguagem de Máquina.
+	Processamento:
+		Traduz instruções Assembly para seus respectivos opcodes, conforme a tabela de equivalência.
+		Inclui os endereços dos operandos e preenche os bytes adicionais conforme o formato exigido.
+		Adiciona o cabeçalho fixo 03 4E 44 52 no início do arquivo binário.
+	Compatibilidade: O arquivo gerado pode ser carregado diretamente no emulador Neander para execução.
+
+Compilado e executado pelo DevC++ 5.11/*
 
 /*Bibliotecas*/
 #include <stdio.h>
