@@ -16,6 +16,17 @@ char     nome_arquivo[50+1]; /*Variável Char com Null terminator para indicar f
 char line [50+1]; /*Buffer para armazenar cada linha lida*/
 char save[10]; /* Buffer para o processamento da tradução, armazenando os endereços das instruções*/
 
+/*Protótipos de funções*/
+unsigned char hex_to_byte(const char *hex);
+
+/*Construção das funções*/
+unsigned char hex_to_byte(const char *hex) {
+    unsigned int value;
+    sscanf(hex, "%2x", &value);
+    return (unsigned char)value;
+}
+
+
 /*Corpo do programa*/
 int main()
 {
@@ -43,7 +54,10 @@ int main()
 		exit (0);
 	}
 	
-	fprintf(Trad, "03 4E 44 52\n");
+	fputc(0x03, Trad);
+    fputc(0x4E, Trad);
+    fputc(0x44, Trad);
+    fputc(0x52, Trad);
 	
 	/* LÊ o arquivo .ASM e transfere para o .mem */	
 	while (fgets(line, sizeof(line), Arq) != NULL) /*Enquanto fgets ler uma linha do arquivo Arq e a armazenar no buffer line for diferente de NULL*/
@@ -51,49 +65,49 @@ int main()
 	{
 		printf ("%s", line); /*Mostra na tela do programa as strings por linha pegos em line*/
 		if (strncmp(line, "NOP", 3) == 0) {
-	            fprintf(Trad, "00 00 00 00\n");  /* NOP: 00 00 00 00 */
+	            fputc(0x00, Trad); fputc(0x00, Trad); fputc(0x00, Trad); fputc(0x00, Trad);  /* NOP: 00 00 00 00 */
 	        }
-	        else if (strncmp(line, "STA", 3) == 0) {
-	            sscanf(line, "STA %s", save);
-	            fprintf(Trad, "10 00 %s 00\n", save);  /* STA: 10 00 <endereço> 00 */
-	        }
-	        else if (strncmp(line, "LDA", 3) == 0) {
-	            sscanf(line, "LDA %s", save);
-	            fprintf(Trad, "20 00 %s 00\n", save);  /* LDA: 20 00 <endereço> 00 */
-	        }
-	        else if (strncmp(line, "ADD", 3) == 0) {
-	            sscanf(line, "ADD %s", save);
-	            fprintf(Trad, "30 00 %s 00\n", save);  /* ADD: 30 00 <endereço> 00 */
-	        }
-	        else if (strncmp(line, "OR", 2) == 0) {
-	            sscanf(line, "OR %s", save);
-	            fprintf(Trad, "40 00 %s 00\n", save);  /* OR: 40 00 <endereço> 00 */
-	        }
-	        else if (strncmp(line, "AND", 3) == 0) {
-	            sscanf(line, "AND %s", save);
-	            fprintf(Trad, "50 00 %s 00\n", save);  /* AND: 50 00 <endereço> 00 */
-	        }
-	        else if (strncmp(line, "NOT", 3) == 0) {
-	            fprintf(Trad, "60 00 00 00\n");  /* NOT: 60 00 00 00 */
-	        }
-	        else if (strncmp(line, "JMP", 3) == 0) {
-	            sscanf(line, "JMP %s", save);
-	            fprintf(Trad, "80 00 %s 00\n", save);  /* JMP: 80 00 <endereço> 00 */
-	        }
-	        else if (strncmp(line, "JN", 2) == 0) {
-	            sscanf(line, "JN %s", save);
-	            fprintf(Trad, "90 00 %s 00\n", save);  /* JN: 90 00 <endereço> 00 */
-	        }
-	        else if (strncmp(line, "JZ", 2) == 0) {
-	            sscanf(line, "JZ %s", save);
-	            fprintf(Trad, "A0 00 %s 00\n", save);  /* JZ: A0 00 <endereço> 00 */
-	        }
-	        else if (strncmp(line, "HLT", 3) == 0) {
-	            fprintf(Trad, "F0 00\n");  /* HLT: F0 00 00 00 */
-	        }
-	        else {
-	            printf("Instrução não reconhecida: %s\n", line);
-	        }
+	    else if (strncmp(line, "STA", 3) == 0) {
+            sscanf(line, "STA %s", save);
+            fputc(0x10, Trad); fputc(0x00, Trad); fputc(hex_to_byte(save), Trad); fputc(0x00, Trad);  /* STA: 10 00 <endereço> 00 */
+        }
+        else if (strncmp(line, "LDA", 3) == 0) {
+            sscanf(line, "LDA %s", save);
+            fputc(0x20, Trad); fputc(0x00, Trad); fputc(hex_to_byte(save), Trad); fputc(0x00, Trad);  /* LDA: 20 00 <endereço> 00 */
+        }
+        else if (strncmp(line, "ADD", 3) == 0) {
+            sscanf(line, "ADD %s", save);
+            fputc(0x30, Trad); fputc(0x00, Trad); fputc(hex_to_byte(save), Trad); fputc(0x00, Trad);  /* ADD: 30 00 <endereço> 00 */
+        }
+        else if (strncmp(line, "OR", 2) == 0) {
+            sscanf(line, "OR %s", save);
+            fputc(0x40, Trad); fputc(0x00, Trad); fputc(hex_to_byte(save), Trad); fputc(0x00, Trad);  /* OR: 40 00 <endereço> 00 */
+        }
+        else if (strncmp(line, "AND", 3) == 0) {
+            sscanf(line, "AND %s", save);
+            fputc(0x50, Trad); fputc(0x00, Trad); fputc(hex_to_byte(save), Trad); fputc(0x00, Trad);  /* AND: 50 00 <endereço> 00 */
+        }
+        else if (strncmp(line, "NOT", 3) == 0) {
+            fputc(0x60, Trad); fputc(0x00, Trad); fputc(0x00, Trad); fputc(0x00, Trad);  /* NOT: 60 00 00 00 */
+        }
+        else if (strncmp(line, "JMP", 3) == 0) {
+            sscanf(line, "JMP %s", save);
+            fputc(0x80, Trad); fputc(0x00, Trad); fputc(hex_to_byte(save), Trad); fputc(0x00, Trad);  /* JMP: 80 00 <endereço> 00 */
+        }
+        else if (strncmp(line, "JN", 2) == 0) {
+            sscanf(line, "JN %s", save);
+            fputc(0x90, Trad); fputc(0x00, Trad); fputc(hex_to_byte(save), Trad); fputc(0x00, Trad);  /* JN: 90 00 <endereço> 00 */
+        }
+        else if (strncmp(line, "JZ", 2) == 0) {
+            sscanf(line, "JZ %s", save);
+            fputc(0xA0, Trad); fputc(0x00, Trad); fputc(hex_to_byte(save), Trad); fputc(0x00, Trad);  /* JZ: A0 00 <endereço> 00 */
+        }
+        else if (strncmp(line, "HLT", 3) == 0) {
+            fputc(0xF0, Trad); fputc(0x00, Trad); fputc(0x00, Trad); fputc(0x00, Trad);  /* HLT: F0 00 00 00 */
+        }
+        else {
+            printf("Instrução não reconhecida: %s\n", line);
+        }
 	   	  
 	}
 		
