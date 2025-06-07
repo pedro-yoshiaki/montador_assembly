@@ -24,7 +24,7 @@ Para compilar e executar o montador, siga os passos abaixo:
 Certifique-se de ter um compilador C instalado (como GCC ou o MingW, que acompanha o Dev-C++).
 Tenha o emulador WNeander.exe no mesmo diretório do projeto para que ele possa ser aberto automaticamente.
 
-### 2.Crie um arquivo de código Assembly:
+### 2. Crie um arquivo de código Assembly:
 Crie um arquivo de texto com a extensão .asm (por exemplo, prog1.asm).
 Escreva as instruções do Neander, uma por linha. Exemplo:
 
@@ -33,16 +33,16 @@ ADD 81
 STA 82
 HLT
 
-### 3.Compile o montador:
+### 3. Compile o montador:
 Abra um terminal ou prompt de comando e execute o seguinte comando para compilar o main.c:
 gcc main.c -o montador.exe
 
-### 4.Execute o montador:
+### 4. Execute o montador:
 Execute o programa compilado:
 ./montador.exe
 O programa solicitará o nome do arquivo de entrada. Digite o nome do seu arquivo Assembly (ex: prog1.asm) e pressione Enter.
 
-### 5.Verifique a saída:
+### 5. Verifique a saída:
 O programa criará um arquivo chamado Traduzido.mem.
 Ele também tentará iniciar o emulador WNeander automaticamente, onde você poderá carregar o arquivo .mem gerado e testar seu programa.
 
