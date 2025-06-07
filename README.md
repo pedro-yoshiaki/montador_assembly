@@ -13,8 +13,8 @@ Formatação Automática: Insere o cabeçalho 03 4E 44 52 exigido pelo Neander n
 Manipulação de Arquivos: Lê um arquivo de entrada .asm e cria um arquivo de saída .mem.
 
 ## 🛠️ Tecnologias Utilizadas
-Linguagem: C
-Bibliotecas C Padrão: stdio.h, stdlib.h, string.h
+Linguagem: C;
+Bibliotecas C Padrão: stdio.h, stdlib.h, string.h;
 Compilador: O código foi desenvolvido e testado utilizando o Dev-C++ 5.11.
 
 ## 🚀 Como Executar o Projeto
