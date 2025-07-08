@@ -1,5 +1,5 @@
 # ⚙️Montador para a Arquitetura Neander
-Este projeto é um montador (assembler) desenvolvido em linguagem C, criado como parte de um trabalho acadêmico. Ele traduz código escrito em Assembly para a arquitetura didática Neander em seu correspondente código de máquina, gerando um arquivo binário que pode ser executado pelo emulador WNeander.
+Este projeto é um montador (assembler) desenvolvido em linguagem C. Ele traduz código escrito em Assembly para a arquitetura didática Neander em seu correspondente código de máquina, gerando um arquivo binário que pode ser executado pelo emulador WNeander.
 
 ![image](https://github.com/user-attachments/assets/36ba9e4f-9b29-4252-9e52-da6bd36d8d02)
 
